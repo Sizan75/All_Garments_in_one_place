@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 19, 2020 at 04:00 PM
+-- Generation Time: Oct 28, 2020 at 02:15 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -39,19 +38,29 @@ CREATE TABLE `admin` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `buyers_info`
+-- Table structure for table `buyers`
 --
 
-CREATE TABLE `buyers_info` (
-  `bid` int(250) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `address` varchar(255) NOT NULL,
-  `phone` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `country` varchar(255) NOT NULL,
-  `identification_id` int(255) NOT NULL,
-  `password` varchar(250) NOT NULL
+CREATE TABLE `buyers` (
+  `buyer_id` int(50) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `phone` varchar(50) NOT NULL,
+  `company_name` varchar(50) NOT NULL,
+  `address` varchar(50) NOT NULL,
+  `nid` varchar(50) NOT NULL,
+  `identification_id` varchar(50) NOT NULL,
+  `password` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `buyers`
+--
+
+INSERT INTO `buyers` (`buyer_id`, `name`, `email`, `phone`, `company_name`, `address`, `nid`, `identification_id`, `password`) VALUES
+(1, 'sas', 'ask@gmail.com', 'sndfeko', 'sdnfk', 'lskfmsxlkd', 'skfn', 'slkfn', 'lkfnl'),
+(2, 'dkfsklLKSND', 'DKLK@flkdnkjlf.com', 'lksdmfl', 'dlksmdfk', 'klfmoif', 'lkfcslk', 'lksdnfkl', 'lksdnfiko'),
+(500, '', '', '', '', '', 'saki@gmail.com', '', 'saki');
 
 -- --------------------------------------------------------
 
@@ -85,6 +94,30 @@ CREATE TABLE `garments_info` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `garments_information`
+--
+
+CREATE TABLE `garments_information` (
+  `license_id` int(50) NOT NULL,
+  `gname` varchar(50) NOT NULL,
+  `address` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `country` varchar(255) NOT NULL,
+  `phone` varchar(255) NOT NULL,
+  `website` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `garments_information`
+--
+
+INSERT INTO `garments_information` (`license_id`, `gname`, `address`, `email`, `country`, `phone`, `website`, `password`) VALUES
+(122331, 'assdds', 'adsdsas', 'sads@gmail.com', 'bd', 's11111', 'SNCJD', 'SNDJL');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `login`
 --
 
@@ -93,6 +126,29 @@ CREATE TABLE `login` (
   `password` varchar(255) NOT NULL,
   `user_type` int(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `logintest`
+--
+
+CREATE TABLE `logintest` (
+  `id` int(50) NOT NULL,
+  `email` varchar(30) NOT NULL,
+  `password` varchar(30) NOT NULL,
+  `u_type` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `logintest`
+--
+
+INSERT INTO `logintest` (`id`, `email`, `password`, `u_type`) VALUES
+(1, '', 'saki', 'buyer'),
+(2, 'DKLK@flkdnkjlf.com', 'lksdnfiko', 'buyer'),
+(3, 's@gmail.com', '1234', 'garment'),
+(4, 'sads@gmail.com', 'SNDJL', 'garment');
 
 -- --------------------------------------------------------
 
@@ -145,6 +201,29 @@ CREATE TABLE `products` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `product_info`
+--
+
+CREATE TABLE `product_info` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `description` text NOT NULL,
+  `image` varchar(500) NOT NULL,
+  `price` double NOT NULL,
+  `colour` text NOT NULL,
+  `size` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `product_info`
+--
+
+INSERT INTO `product_info` (`id`, `name`, `description`, `image`, `price`, `colour`, `size`) VALUES
+(19, 'ass', 'asassa', '0_1603749137.png', 60, 'red,green,yollow', 'x,xl,m,l');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `user_type`
 --
 
@@ -165,10 +244,10 @@ ALTER TABLE `admin`
   ADD UNIQUE KEY `email` (`email`);
 
 --
--- Indexes for table `buyers_info`
+-- Indexes for table `buyers`
 --
-ALTER TABLE `buyers_info`
-  ADD PRIMARY KEY (`bid`),
+ALTER TABLE `buyers`
+  ADD PRIMARY KEY (`buyer_id`),
   ADD UNIQUE KEY `email` (`email`);
 
 --
@@ -184,7 +263,15 @@ ALTER TABLE `garments_catagory`
 ALTER TABLE `garments_info`
   ADD PRIMARY KEY (`license_id`),
   ADD UNIQUE KEY `email` (`email`),
+  ADD UNIQUE KEY `email_2` (`email`),
   ADD KEY `FK_catagory` (`catagory`);
+
+--
+-- Indexes for table `garments_information`
+--
+ALTER TABLE `garments_information`
+  ADD PRIMARY KEY (`license_id`),
+  ADD UNIQUE KEY `email` (`email`);
 
 --
 -- Indexes for table `login`
@@ -192,6 +279,13 @@ ALTER TABLE `garments_info`
 ALTER TABLE `login`
   ADD PRIMARY KEY (`email`),
   ADD KEY `FK_user_type` (`user_type`);
+
+--
+-- Indexes for table `logintest`
+--
+ALTER TABLE `logintest`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email` (`email`);
 
 --
 -- Indexes for table `order_info`
@@ -218,10 +312,38 @@ ALTER TABLE `products`
   ADD KEY `garments_id` (`garments_id`);
 
 --
+-- Indexes for table `product_info`
+--
+ALTER TABLE `product_info`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `user_type`
 --
 ALTER TABLE `user_type`
   ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `buyers`
+--
+ALTER TABLE `buyers`
+  MODIFY `buyer_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=501;
+
+--
+-- AUTO_INCREMENT for table `logintest`
+--
+ALTER TABLE `logintest`
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `product_info`
+--
+ALTER TABLE `product_info`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- Constraints for dumped tables
