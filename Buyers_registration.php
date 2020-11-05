@@ -30,10 +30,13 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item active">
-                    <button type="button" class="btn btn-secondary" style="margin-left: 450px;">About</button>
+                    <button type="button" onclick="window.location.href='./index.php'"class="btn btn-secondary" style="margin-left: 450px; background-color: #0d6f6f;">Home</button>
                 </li>
                 <li class="nav-item">
-                    <button type="button" class="btn btn-secondary" style="margin-left: 10px;">Contact Us</button>
+                    <button type="button" onclick="window.location.href='./buyers_profile.php'" class="btn btn-secondary" style="margin-left: 10px; background-color: #0d6f6f;">Profile</button>
+                </li>
+                <li class="nav-item">
+                    <button type="button" onclick="window.location.href='./logout.php'" class="btn btn-secondary" style="margin-left: 10px; background-color: #0d6f6f;">Log Out</button>
                 </li>
             </ul>
         </div>
@@ -43,7 +46,7 @@
 <div class="row" >
             <div class="col-xs-6 col-md-3">
               <a href="#" class="thumbnail">
-<!--                <img src="./picture/g.jpg" alt="...">-->
+                <img src="./picture/logo.jpg" alt="...">
               </a>
             </div>
           </div>
@@ -118,19 +121,20 @@
               $licence=$_POST['licence'];
               $nid=$_POST['nid'];
               $password=$_POST['password'];
+
               $user_type='buyer';
 
               $sql="insert into buyers(name,address,email,phone,company_name,nid,identification_id,password) values('$name','$address','$email','$phone','$company_name','$nid','$licence','$password')";
               $query=mysqli_query($conn, $sql) or die(mysqli_error($conn));
               if($query==1){
-               $sql1="insert into logintest(email,password,u_type) values('$email','$password','$user_type') ";
+               $sql1="insert into login(email,password,u_type) values('$email','$password','$user_type') ";
                $query1=mysqli_query($conn, $sql1) or die(mysqli_error($conn));
                if($query1==1){
                    $_SESSION['user_id']=mysqli_insert_id($conn);
                     echo "
                                 <script>
                                 alert('Registration Successfully');
-                                window.location.href='./';
+                                window.location.href='./login.php';
                                 </script>";
                             }else{
                                 echo "Something Went Wrong. Try Again";

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.0.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 28, 2020 at 02:15 PM
--- Server version: 10.4.6-MariaDB
--- PHP Version: 7.3.9
+-- Generation Time: Nov 05, 2020 at 02:54 PM
+-- Server version: 10.4.14-MariaDB
+-- PHP Version: 7.4.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,20 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `garments_market_place`
 --
-
--- --------------------------------------------------------
-
---
--- Table structure for table `admin`
---
-
-CREATE TABLE `admin` (
-  `id` int(255) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `phone` varchar(255) NOT NULL,
-  `address` varchar(250) NOT NULL,
-  `email` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -58,38 +44,8 @@ CREATE TABLE `buyers` (
 --
 
 INSERT INTO `buyers` (`buyer_id`, `name`, `email`, `phone`, `company_name`, `address`, `nid`, `identification_id`, `password`) VALUES
-(1, 'sas', 'ask@gmail.com', 'sndfeko', 'sdnfk', 'lskfmsxlkd', 'skfn', 'slkfn', 'lkfnl'),
-(2, 'dkfsklLKSND', 'DKLK@flkdnkjlf.com', 'lksdmfl', 'dlksmdfk', 'klfmoif', 'lkfcslk', 'lksdnfkl', 'lksdnfiko'),
-(500, '', '', '', '', '', 'saki@gmail.com', '', 'saki');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `garments_catagory`
---
-
-CREATE TABLE `garments_catagory` (
-  `gc_id` int(255) NOT NULL,
-  `catagory_name` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `garments_info`
---
-
-CREATE TABLE `garments_info` (
-  `license_id` int(250) NOT NULL,
-  `gname` varchar(250) NOT NULL,
-  `address` varchar(250) NOT NULL,
-  `country` varchar(250) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `website` varchar(250) NOT NULL,
-  `phone` varchar(250) NOT NULL,
-  `catagory` varchar(250) NOT NULL,
-  `password` varchar(250) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+(501, 'John Wick', 'johnwick@gmail.com', '+0232546573', 'ZARA', 'Municipality of Arteixo, Spain', '5684409832', '554767344377', 'johnwick'),
+(502, 'Cristiano Ronaldo', 'c.ronaldo@gmail.com', '03856503193', 'CR7', 'Turin, Italy', '03656503193', '03846503193', 'c.ronaldo7');
 
 -- --------------------------------------------------------
 
@@ -113,7 +69,9 @@ CREATE TABLE `garments_information` (
 --
 
 INSERT INTO `garments_information` (`license_id`, `gname`, `address`, `email`, `country`, `phone`, `website`, `password`) VALUES
-(122331, 'assdds', 'adsdsas', 'sads@gmail.com', 'bd', 's11111', 'SNCJD', 'SNDJL');
+(1234506565, 'Epyllion Group', 'NINAKABBO 227/A  Level: 12-13,Tejgaon-Gulshan Link', 'info@epylliongroup.com', 'Bangladesh', '+8802 9840223', 'www.epylliongroup.com', 'epylliongroup'),
+(1343655398, 'Ha-meem Group', 'Phoenix Tower (4th Floor) 407, Tejgaon Industrial ', 'delwerp2000@yahoo.com', 'Bangladesh', '+880-2-8170623', 'http://www.hameemgroup.net/', 'hameemgroup'),
+(2147483647, 'BEXIMCO Fashions Ltd.', '17 Dhanmondi R/A, Road No. 2, Dhaka-1205, Banglade', 'beximcochq@beximco.net', 'Bangladesh', '880-2-8618220', 'http://beximcofashions.com/', 'beximco220');
 
 -- --------------------------------------------------------
 
@@ -122,33 +80,52 @@ INSERT INTO `garments_information` (`license_id`, `gname`, `address`, `email`, `
 --
 
 CREATE TABLE `login` (
-  `email` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `user_type` int(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `logintest`
---
-
-CREATE TABLE `logintest` (
   `id` int(50) NOT NULL,
   `email` varchar(30) NOT NULL,
-  `password` varchar(30) NOT NULL,
+  `password` varchar(40) NOT NULL,
   `u_type` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `logintest`
+-- Dumping data for table `login`
 --
 
-INSERT INTO `logintest` (`id`, `email`, `password`, `u_type`) VALUES
-(1, '', 'saki', 'buyer'),
-(2, 'DKLK@flkdnkjlf.com', 'lksdnfiko', 'buyer'),
-(3, 's@gmail.com', '1234', 'garment'),
-(4, 'sads@gmail.com', 'SNDJL', 'garment');
+INSERT INTO `login` (`id`, `email`, `password`, `u_type`) VALUES
+(6, 'delwerp2000@yahoo.com', 'hameemgroup', 'garment'),
+(7, 'beximcochq@beximco.net', 'beximco220', 'garment'),
+(8, 'info@epylliongroup.com', 'epylliongroup', 'garment'),
+(9, 'johnwick@gmail.com', 'johnwick', 'buyer'),
+(10, 'c.ronaldo@gmail.com', 'c.ronaldo7', 'buyer');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `offers`
+--
+
+CREATE TABLE `offers` (
+  `o_id` int(255) NOT NULL,
+  `name` varchar(500) CHARACTER SET latin1 NOT NULL,
+  `image` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `buyer_email` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `quantity` int(255) DEFAULT NULL,
+  `price` double(255,4) DEFAULT NULL,
+  `colour` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `details` text CHARACTER SET latin1 NOT NULL,
+  `size` varchar(255) CHARACTER SET latin1 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `offers`
+--
+
+INSERT INTO `offers` (`o_id`, `name`, `image`, `buyer_email`, `quantity`, `price`, `colour`, `details`, `size`) VALUES
+(2, 'Cotton-blend hoodie', '9_1604579726.png', 'johnwick@gmail.com', 1000, 20.5000, 'Orange', 'Top in soft sweatshirt fabric made from a cotton blend with a jersey-lined hood, gently dropped shoulders, long sleeves and ribbing at the cuffs and hem.\r\n\r\nComposition\r\n\r\n        Shell: Cotton 80%, Polyester 20%Hood: Cotton 100%', '0-2Y,2-4Y, 4-6Y'),
+(3, 'Printed Ninja sweat shirt', '9_1604580043.png', 'johnwick@gmail.com', 20000, 25.4500, 'Light Gray', 'Long-sleeved top in soft, printed sweatshirt fabric with ribbing around the neckline, cuffs and hem. Soft brushed inside.\r\n\r\nComposition\r\n\r\n        Cotton 80%, Polyester 20%Elastic rib: Cotton 95%, Elastane 5%', '0-2Y,2-4Y, 4-6Y'),
+(4, 'Fine-knit jumper', '9_1604580127.png', 'johnwick@gmail.com', 5000, 24.4000, 'Gray', 'Jumper in soft, fine-knit cotton with long sleeves and ribbing around the neckline, cuffs and hem.\r\n\r\nComposition\r\nCotton 100%', '0-2Y,2-4Y, 4-6Y'),
+(5, 'Oversized printed T-shirt', '10_1604581522.png', 'c.ronaldo@gmail.com', 6000, 35.5000, 'Light beige', 'Oversized T-shirt in soft cotton jersey with a print motif on the front, a round, ribbed neckline and gently dropped shoulders.', 'L,XL,XXL'),
+(6, 'Jacquard-knit jumper', '10_1604581800.png', 'c.ronaldo@gmail.com', 1200, 40.5000, 'Red/Mickey Mouse', 'umper in a soft jacquard knit containing some wool with dropped shoulders, long sleeves and ribbing around the neckline, cuffs and hem.', 'L,XL,XXL'),
+(7, 'Cotton shirt', '10_1604581909.png', 'c.ronaldo@gmail.com', 3000, 30.0000, 'Red/Black checked', 'Straight-cut shirt in a cotton weave with a collar, buttons down the front and yoke with a pleat at the back. Open chest pocket, long sleeves with buttoned cuffs, and a rounded hem. Slightly longer at the back.\r\n\r\nWeight\r\n    0.2 KG', 'L,XL,XXL');
 
 -- --------------------------------------------------------
 
@@ -161,42 +138,20 @@ CREATE TABLE `order_info` (
   `product_id` int(64) DEFAULT NULL,
   `quantity` int(64) DEFAULT NULL,
   `total_price` double(64,4) DEFAULT NULL,
-  `gid` int(250) DEFAULT NULL,
-  `p_colour` varchar(250) DEFAULT NULL,
-  `p_size` varchar(250) DEFAULT NULL,
-  `buyers_id` int(250) DEFAULT NULL
+  `address` text NOT NULL,
+  `buyer_email` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
 --
--- Table structure for table `order_product`
+-- Dumping data for table `order_info`
 --
 
-CREATE TABLE `order_product` (
-  `id` int(255) NOT NULL,
-  `order_id` int(255) NOT NULL,
-  `product_id` int(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `products`
---
-
-CREATE TABLE `products` (
-  `product_id` int(255) NOT NULL,
-  `pname` varchar(250) NOT NULL,
-  `p_type` varchar(255) NOT NULL,
-  `min_order` int(255) NOT NULL,
-  `price` decimal(60,0) NOT NULL,
-  `size` varchar(255) NOT NULL,
-  `colour` varchar(255) NOT NULL,
-  `image` varchar(255) NOT NULL,
-  `details` varchar(1000) NOT NULL,
-  `garments_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+INSERT INTO `order_info` (`order_id`, `product_id`, `quantity`, `total_price`, `address`, `buyer_email`) VALUES
+(14, 30, 500, 17500.0000, ' Turin,Spain', 'c.ronaldo@gmail.com'),
+(15, 28, 10000, 500000.0000, ' Madrid,Spain', 'c.ronaldo@gmail.com'),
+(16, 27, 20000, 1600000.0000, ' Paris,France', 'c.ronaldo@gmail.com'),
+(17, 31, 10000, 325000.0000, ' London,England', 'johnwick@gmail.com'),
+(18, 29, 5000, 200000.0000, 'Dhanmondi,Dhaka,Bangladesh ', 'johnwick@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -205,43 +160,61 @@ CREATE TABLE `products` (
 --
 
 CREATE TABLE `product_info` (
-  `id` int(11) NOT NULL,
+  `p_id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `description` text NOT NULL,
   `image` varchar(500) NOT NULL,
   `price` double NOT NULL,
   `colour` text NOT NULL,
-  `size` text NOT NULL
+  `size` text NOT NULL,
+  `min_order` int(50) NOT NULL,
+  `gname` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `product_info`
 --
 
-INSERT INTO `product_info` (`id`, `name`, `description`, `image`, `price`, `colour`, `size`) VALUES
-(19, 'ass', 'asassa', '0_1603749137.png', 60, 'red,green,yollow', 'x,xl,m,l');
+INSERT INTO `product_info` (`p_id`, `name`, `description`, `image`, `price`, `colour`, `size`, `min_order`, `gname`, `email`) VALUES
+(23, 'SLIM FIT DENIM OVERDYE SHIRT', 'This classic cotton denim shirt has a slim fit and is overdyed, to be finished off with CR7 logo tape on the side. ', '8_1604576625.png', 90, 'Red', 'S,M,L,XL,XXL', 500, 'Epyllion Group', 'info@epylliongroup.com'),
+(24, 'REGULAR FIT RAGLAN JACQUARD PULLOVER WITH LOGO DESIGN', 'A crew neck with raglan sleeve pullover in a viscose blend. This pullover has a regular fit and our CR7 logo jacquard knitted on the chest. ', '8_1604576935.png', 80, 'Navy', 'S,M,L,XL,XXL', 1000, 'Epyllion Group', 'info@epylliongroup.com'),
+(25, 'Slim fit classic crew neck pullover', 'A classic cotton crew neck pullover with a slim fit. This item has been irregularly dyed to create a faded effect and has a CR7 logo tape on the side. ', '8_1604577029.png', 95, 'Cobalt', 'S,M,L,XL,XXL', 1500, 'Epyllion Group', 'info@epylliongroup.com'),
+(26, 'Trucker jacket with CR7 logo in bright indigo stretch denim', 'Our bright indigo cotton trucker jacket has a worn look and is made with an embroidered CR7 logo on the back. ', '6_1604577301.png', 75, 'Vibrant Blue', 'L,XL,XXL', 20000, 'Ha-meem Group', 'delwerp2000@yahoo.com'),
+(27, 'STRAIGHT FIT JEANS IN BRIGHT INDIGO STRETCH DENIM', 'These straight fit jeans are designed with a little bit of stretch and have a comfortable fit. They are bright indigo and have a lightly used effect.', '6_1604577441.png', 80, 'Vibrant Blue', 'W28/L30 , W29/30, W30/L30, W31/31', 10000, 'Ha-meem Group', 'delwerp2000@yahoo.com'),
+(28, 'REGULAR FIT SHORT SLEEVE SHIRT WITH CAMOUFLAGE PRINT', 'A short sleeve shirt in red camouflage printed viscose fabric. This shirt has a regular fit, button closure and our CR7 logo tape on the sideseam. ', '6_1604577577.png', 50, 'RED CAMOUFLAGE', 'M,L,XL,XXL', 10000, 'Ha-meem Group', 'delwerp2000@yahoo.com'),
+(29, 'Fleece hoodie', 'Long-sleeved hoodie in soft fleece. Double-layered drawstring hood with a wrapover front, a kangaroo pocket and covered elastication at the cuffs and hem.  Weight  0.61 KG, Composition   Polyester 100%', '7_1604578401.png', 40, 'Light beige', 'S,M,L,XL,XXL', 500, 'BEXIMCO Fashions Ltd.', 'beximcochq@beximco.net'),
+(30, 'Cotton-blend hoodie', 'Top in soft sweatshirt fabric made from a cotton blend with a jersey-lined hood, gently dropped shoulders, long sleeves and ribbing at the cuffs and hem.  Weight     0.22 KG Composition          Cotton 80%, Polyester 20%', '7_1604578901.png', 35, 'Yellow', '2-4Y, 4-6Y', 400, 'BEXIMCO Fashions Ltd.', 'beximcochq@beximco.net'),
+(31, 'Printed sweat shirt', 'Long-sleeved top in soft, printed sweatshirt fabric with ribbing around the neckline, cuffs and hem. Soft brushed inside.  Weight     0.12 KG Composition    Cotton 83%, Polyester 17%', '7_1604579049.png', 32.5, 'Blue/Paw Patrol', '2-4Y, 4-6Y', 1000, 'BEXIMCO Fashions Ltd.', 'beximcochq@beximco.net');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user_type`
+-- Table structure for table `submitted_offers`
 --
 
-CREATE TABLE `user_type` (
+CREATE TABLE `submitted_offers` (
   `id` int(255) NOT NULL,
-  `ut_name` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `offer_id` int(255) NOT NULL,
+  `price` double(255,4) NOT NULL,
+  `g_email` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `submitted_offers`
+--
+
+INSERT INTO `submitted_offers` (`id`, `offer_id`, `price`, `g_email`) VALUES
+(5, 7, 29.8000, 'beximcochq@beximco.net'),
+(6, 4, 24.5000, 'beximcochq@beximco.net'),
+(7, 5, 35.2000, 'beximcochq@beximco.net'),
+(8, 2, 20.5000, 'info@epylliongroup.com'),
+(9, 2, 20.4000, 'beximcochq@beximco.net'),
+(10, 3, 25.3500, 'delwerp2000@yahoo.com');
 
 --
 -- Indexes for dumped tables
 --
-
---
--- Indexes for table `admin`
---
-ALTER TABLE `admin`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `email` (`email`);
 
 --
 -- Indexes for table `buyers`
@@ -249,22 +222,6 @@ ALTER TABLE `admin`
 ALTER TABLE `buyers`
   ADD PRIMARY KEY (`buyer_id`),
   ADD UNIQUE KEY `email` (`email`);
-
---
--- Indexes for table `garments_catagory`
---
-ALTER TABLE `garments_catagory`
-  ADD PRIMARY KEY (`gc_id`),
-  ADD UNIQUE KEY `catagory_name` (`catagory_name`);
-
---
--- Indexes for table `garments_info`
---
-ALTER TABLE `garments_info`
-  ADD PRIMARY KEY (`license_id`),
-  ADD UNIQUE KEY `email` (`email`),
-  ADD UNIQUE KEY `email_2` (`email`),
-  ADD KEY `FK_catagory` (`catagory`);
 
 --
 -- Indexes for table `garments_information`
@@ -277,50 +234,31 @@ ALTER TABLE `garments_information`
 -- Indexes for table `login`
 --
 ALTER TABLE `login`
-  ADD PRIMARY KEY (`email`),
-  ADD KEY `FK_user_type` (`user_type`);
-
---
--- Indexes for table `logintest`
---
-ALTER TABLE `logintest`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `email` (`email`);
+
+--
+-- Indexes for table `offers`
+--
+ALTER TABLE `offers`
+  ADD PRIMARY KEY (`o_id`);
 
 --
 -- Indexes for table `order_info`
 --
 ALTER TABLE `order_info`
-  ADD PRIMARY KEY (`order_id`),
-  ADD KEY `offer_id` (`product_id`),
-  ADD KEY `gid` (`gid`),
-  ADD KEY `buyers_id` (`buyers_id`);
-
---
--- Indexes for table `order_product`
---
-ALTER TABLE `order_product`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `FK_orderid` (`order_id`),
-  ADD KEY `FK_productid` (`product_id`);
-
---
--- Indexes for table `products`
---
-ALTER TABLE `products`
-  ADD PRIMARY KEY (`product_id`),
-  ADD KEY `garments_id` (`garments_id`);
+  ADD PRIMARY KEY (`order_id`);
 
 --
 -- Indexes for table `product_info`
 --
 ALTER TABLE `product_info`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`p_id`);
 
 --
--- Indexes for table `user_type`
+-- Indexes for table `submitted_offers`
 --
-ALTER TABLE `user_type`
+ALTER TABLE `submitted_offers`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -331,59 +269,37 @@ ALTER TABLE `user_type`
 -- AUTO_INCREMENT for table `buyers`
 --
 ALTER TABLE `buyers`
-  MODIFY `buyer_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=501;
+  MODIFY `buyer_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=503;
 
 --
--- AUTO_INCREMENT for table `logintest`
+-- AUTO_INCREMENT for table `login`
 --
-ALTER TABLE `logintest`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+ALTER TABLE `login`
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `offers`
+--
+ALTER TABLE `offers`
+  MODIFY `o_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `order_info`
+--
+ALTER TABLE `order_info`
+  MODIFY `order_id` int(64) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `product_info`
 --
 ALTER TABLE `product_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `p_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
--- Constraints for dumped tables
+-- AUTO_INCREMENT for table `submitted_offers`
 --
-
---
--- Constraints for table `garments_info`
---
-ALTER TABLE `garments_info`
-  ADD CONSTRAINT `FK_catagory` FOREIGN KEY (`catagory`) REFERENCES `garments_catagory` (`catagory_name`);
-
---
--- Constraints for table `login`
---
-ALTER TABLE `login`
-  ADD CONSTRAINT `FK_admin_email` FOREIGN KEY (`email`) REFERENCES `admin` (`email`),
-  ADD CONSTRAINT `FK_email` FOREIGN KEY (`email`) REFERENCES `buyers_info` (`email`),
-  ADD CONSTRAINT `FK_gemail` FOREIGN KEY (`email`) REFERENCES `garments_info` (`email`),
-  ADD CONSTRAINT `FK_user_type` FOREIGN KEY (`user_type`) REFERENCES `user_type` (`id`);
-
---
--- Constraints for table `order_info`
---
-ALTER TABLE `order_info`
-  ADD CONSTRAINT `order_info_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`),
-  ADD CONSTRAINT `order_info_ibfk_2` FOREIGN KEY (`gid`) REFERENCES `garments_info` (`license_id`),
-  ADD CONSTRAINT `order_info_ibfk_3` FOREIGN KEY (`buyers_id`) REFERENCES `buyers_info` (`bid`);
-
---
--- Constraints for table `order_product`
---
-ALTER TABLE `order_product`
-  ADD CONSTRAINT `FK_orderid` FOREIGN KEY (`order_id`) REFERENCES `order_info` (`order_id`),
-  ADD CONSTRAINT `FK_productid` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`);
-
---
--- Constraints for table `products`
---
-ALTER TABLE `products`
-  ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`garments_id`) REFERENCES `garments_info` (`license_id`);
+ALTER TABLE `submitted_offers`
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -45,7 +45,7 @@
 </head>
 <body>
 <?php include './header.php';
-if($_SESSION['u_type']=="garment"){
+if($_SESSION['u_type']=="buyer"){
     echo "";
 }else{
     die();
@@ -66,14 +66,14 @@ if($_SESSION['u_type']=="garment"){
 </div>
 <div class="container-fluid">
     <nav class="navbar navbar-expand-lg">
-        <a class="navbar-brand" href="./product-upload.php" style="margin-left: 150px; padding-right: 15px; padding-left: 70px; color: #000;">Product Upload</a>
+        <a class="navbar-brand" href="./product-upload.php" style="margin-left: 150px; padding-right: 15px; padding-left: 70px; color: #000;">Post Offer</a>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item active">
-                    <button type="button" class="btn btn-secondary" onclick="window.location.href='./index.php'" style="margin-left: 450px;background-color: #0d6f6f;">Home</button>
+                    <button type="button" onclick="window.location.href='./index.php'" class="btn btn-secondary" style="margin-left: 450px; background-color: #4CAF50;">Home</button>
                 </li>
                 <li class="nav-item">
-                    <button type="button" class="btn btn-secondary" onclick="window.location.href='./logout.php'" style="margin-left: 10px;background-color: #0d6f6f;">Log Out</button>
+                    <button type="button" onclick="window.location.href='./logout.php'" class="btn btn-secondary" style="margin-left: 10px; background-color: #4CAF50; ">Log Out</button>
                 </li>
             </ul>
         </div>
@@ -83,52 +83,45 @@ if($_SESSION['u_type']=="garment"){
 
 <div class="body">
     <form method="post" enctype="multipart/form-data">
-
-      <label for="name">Product Name</label>
-      <input type="text" name="name" required placeholder="Product Name">
-
-      <label for="description">Product Description</label>
-      <input type="text" name="description" required placeholder="Product Description">
-
+        <label for="name">Product Name</label>
+        <input type="text" name="name" required placeholder="Name">
+      <label for="description">Product Description</label> <br>
+        <textarea  name="description" required placeholder="Product Description"></textarea>
+         <br>
         <label for="colour">Colours</label>
         <input type="text" name="colour" required placeholder="Colours">
-        <label for="size">Available Size</label>
-        <input type="text" name="size" required placeholder="Available Size">
-
-      <label for="price">Price</label>
-      <input type="number" step="any" name="price" required placeholder="Your Price"> <br>
-
-        <label for="min_order">Min Order</label>
-        <input type="number"  name="min_order" required placeholder="Minimum Order Quantity">
+        <label for="size">Size</label>
+        <input type="text" name="size" required placeholder="Size">
+        <label for="price">Price</label>
+        <input type="number" step="0.01" name="price" required placeholder="Price"> <br>
+ <br>
+        <label for="quantity">Quantity</label>
+        <input type="number"  name="quantity" required placeholder="Quantity">
 <br>
-        <label for="gname">Garments Name</label>
-        <input type="text" name="gname" required placeholder="Garments Name">
-
       <label for="photos">Choose Image</label>
       <input type="file" name="photos" >
-      <input type="submit" value=" Upload " align="center" name="submit">
+      <input type="submit" value="Post" align="center" name="submit">
         <div style="margin-top: -3px;padding: 12px">
         <?php 
         if(isset($_POST['submit'])){
-          $name=$_POST['name'];
+            $name=$_POST['name'];
           $description=$_POST['description'];
           $price=$_POST['price'];
           $size=$_POST['size'];
           $colour=$_POST['colour'];
-          $gname=$_POST['gname'];
-          $min_order=$_POST['min_order'];
+          $quantity=$_POST['quantity'];
           $photo_name=$_SESSION['user_id'].'_'.time().".png";
           $email=$_SESSION['email'];
-          $sql="insert into product_info(name,description,price,image,size,colour,min_order,gname,email) values('$name','$description','$price','$photo_name','$size','$colour','$min_order','$gname','$email')";
+          $sql="insert into offers(name,details,price,image,size,colour,quantity,buyer_email) values('$name','$description','$price','$photo_name','$size','$colour','$quantity','$email')";
           if($conn){
             print_r($_FILES);
             $tmp_name = $_FILES['photos']["tmp_name"];
-            if(move_uploaded_file($tmp_name, "./picture/product/$photo_name")){
+            if(move_uploaded_file($tmp_name, "./picture/Offer/$photo_name")){
               if(mysqli_query($conn, $sql)){
                 echo "
                 <script>
-                alert('Upload Successfully');
-                window.location.href='./product-upload.php';
+                alert('Offer posted Successfully');
+                window.location.href='./offer_upload.php';
                 </script>";
               }else{
                 echo "Something Went Wrong. Try Again";

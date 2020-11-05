@@ -38,22 +38,22 @@
               <label for="Password">Password</label>
               <input type="password" class="form-control" id="Password" name="password" placeholder="Password"/>
             </div>
-            <div class="checkbox">
-<!--              <label> <input type="checkbox" /> Remember me </label><br />-->
-              <a href="forgetpassword.php">Forgot Password</a>
-            </div>
+<!--            <div class="checkbox">-->
+<!--              <a href="forgetpassword.php">Forgot Password</a>-->
+<!--            </div>-->
               <button type="submit" name="submit" class="btn btn-success btn-block">Sign In</button>
             <p>Dont Have an account? Sign Up Now</p>
            <a href="Buyers_registration.php"> <button type="button"  name="signup" class="btn btn-success btn-block">Sign Up</button>
            </a>
               <?php
               if(isset($_POST['submit'])){
-                  $sql="select * from logintest where email='".$_POST['email']."' and password='".$_POST['password']."'";
+
+                  $sql="select * from login where email='".$_POST['email']."' and password='".$_POST['password']."'";
                   $result = mysqli_query($conn, $sql);
                  if($row = mysqli_fetch_array($result)) {
                       $_SESSION['email']=$row['email'];
                       $_SESSION['u_type']=$row['u_type'];
-                     $_SESSION['id']=$row['id'];
+                     $_SESSION['user_id']=$row['id'];
                       echo "<script>window.location.href='./';</script>";
                   }else
                   echo "<script> alert('Email Or Password Not Match') </script>";

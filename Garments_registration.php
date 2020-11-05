@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+      <style>
+      input[type=number] {
+      -moz-appearance: textfield;
+      }
+      </style>
   </head>
   <body>
   <?php include './header.php'; ?>
@@ -30,11 +35,14 @@
             <div class="collapse navbar-collapse" id="navbarNav">
               <ul class="navbar-nav">
                 <li class="nav-item active">
-                    <button type="button" class="btn btn-secondary" style="margin-left: 450px;">About</button>
+                    <button type="button" onclick="window.location.href='./index.php'" class="btn btn-secondary" style="margin-left: 450px;">Home</button>
                 </li>
                 <li class="nav-item">
-                    <button type="button" class="btn btn-secondary" style="margin-left: 10px;">Contact Us</button>
+                    <button type="button" onclick="window.location.href='./garments_profile.php'" class="btn btn-secondary" style="margin-left: 10px;">Profile</button>
                 </li>
+                  <li class="nav-item">
+                      <button type="button" onclick="window.location.href='./logout.php'" class="btn btn-secondary" style="margin-left: 10px;">Log Out</button>
+                  </li>
               </ul>
             </div>
         </nav>
@@ -91,19 +99,19 @@
            $trade_license=$_POST['trade_license'];
            $password=$_POST['password'];
            $website=$_POST['website'];
-           $user_type='garments';
+           $user_type='garment';
 
                 $sql="insert into garments_information(license_id,gname,address,email,phone,country,website,password) values('$trade_license','$name','$address','$email','$phone','$country','$website','$password')";
                 $query=mysqli_query($conn, $sql) or die(mysqli_error($conn));
                 if($query==1){
-                          $sql1="insert into logintest(email,password,u_type) values('$email','$password','$user_type') ";
+                          $sql1="insert into login(email,password,u_type) values('$email','$password','$user_type') ";
                           $query1=mysqli_query($conn, $sql1) or die(mysqli_error($conn));
                           if($query1==1){
                               $_SESSION['u_type']='garments';
                               echo "
                                 <script>
                                 alert('Registration Successfully');
-                                window.location.href='./';
+                                window.location.href='./login.php';
                                 </script>";
                           }else{
                               echo "Something Went Wrong. Try Again";
