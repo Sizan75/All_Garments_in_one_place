@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 05, 2020 at 02:54 PM
+-- Generation Time: Jan 17, 2021 at 09:41 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.11
 
@@ -45,7 +45,8 @@ CREATE TABLE `buyers` (
 
 INSERT INTO `buyers` (`buyer_id`, `name`, `email`, `phone`, `company_name`, `address`, `nid`, `identification_id`, `password`) VALUES
 (501, 'John Wick', 'johnwick@gmail.com', '+0232546573', 'ZARA', 'Municipality of Arteixo, Spain', '5684409832', '554767344377', 'johnwick'),
-(502, 'Cristiano Ronaldo', 'c.ronaldo@gmail.com', '03856503193', 'CR7', 'Turin, Italy', '03656503193', '03846503193', 'c.ronaldo7');
+(502, 'Cristiano Ronaldo', 'c.ronaldo@gmail.com', '03856503193', 'CR7', 'Turin, Italy', '03656503193', '03846503193', 'c.ronaldo7'),
+(503, 'Sadman Irtiza', 'sadmanirtiza@gmail.com', '01794563512', 'XYZ Group', 'Rangpur,Bangladesh', '0149748344039592', '0129322384392', 'sadman');
 
 -- --------------------------------------------------------
 
@@ -95,7 +96,8 @@ INSERT INTO `login` (`id`, `email`, `password`, `u_type`) VALUES
 (7, 'beximcochq@beximco.net', 'beximco220', 'garment'),
 (8, 'info@epylliongroup.com', 'epylliongroup', 'garment'),
 (9, 'johnwick@gmail.com', 'johnwick', 'buyer'),
-(10, 'c.ronaldo@gmail.com', 'c.ronaldo7', 'buyer');
+(10, 'c.ronaldo@gmail.com', 'c.ronaldo7', 'buyer'),
+(12, 'sadmanirtiza@gmail.com', 'sadman', 'buyer');
 
 -- --------------------------------------------------------
 
@@ -125,7 +127,9 @@ INSERT INTO `offers` (`o_id`, `name`, `image`, `buyer_email`, `quantity`, `price
 (4, 'Fine-knit jumper', '9_1604580127.png', 'johnwick@gmail.com', 5000, 24.4000, 'Gray', 'Jumper in soft, fine-knit cotton with long sleeves and ribbing around the neckline, cuffs and hem.\r\n\r\nComposition\r\nCotton 100%', '0-2Y,2-4Y, 4-6Y'),
 (5, 'Oversized printed T-shirt', '10_1604581522.png', 'c.ronaldo@gmail.com', 6000, 35.5000, 'Light beige', 'Oversized T-shirt in soft cotton jersey with a print motif on the front, a round, ribbed neckline and gently dropped shoulders.', 'L,XL,XXL'),
 (6, 'Jacquard-knit jumper', '10_1604581800.png', 'c.ronaldo@gmail.com', 1200, 40.5000, 'Red/Mickey Mouse', 'umper in a soft jacquard knit containing some wool with dropped shoulders, long sleeves and ribbing around the neckline, cuffs and hem.', 'L,XL,XXL'),
-(7, 'Cotton shirt', '10_1604581909.png', 'c.ronaldo@gmail.com', 3000, 30.0000, 'Red/Black checked', 'Straight-cut shirt in a cotton weave with a collar, buttons down the front and yoke with a pleat at the back. Open chest pocket, long sleeves with buttoned cuffs, and a rounded hem. Slightly longer at the back.\r\n\r\nWeight\r\n    0.2 KG', 'L,XL,XXL');
+(7, 'Cotton shirt', '10_1604581909.png', 'c.ronaldo@gmail.com', 3000, 30.0000, 'Red/Black checked', 'Straight-cut shirt in a cotton weave with a collar, buttons down the front and yoke with a pleat at the back. Open chest pocket, long sleeves with buttoned cuffs, and a rounded hem. Slightly longer at the back.\r\n\r\nWeight\r\n    0.2 KG', 'L,XL,XXL'),
+(8, 'Denim Jacket', '9_1608805702.png', 'johnwick@gmail.com', 1000, 20.0000, 'Red', 'Denim Jacket for man', 'S,M,L,XL'),
+(9, 'TRUCKER JACKET IN BLACK CAMOUFLAGE STRETCH DENIM', '9_1608809866.png', 'johnwick@gmail.com', 2000, 68.7500, 'Black', 'This black cotton trucker jacket is made from comfort denim and has an allover camouflage print for an urban look. ', 'S,M,L,XL');
 
 -- --------------------------------------------------------
 
@@ -139,19 +143,21 @@ CREATE TABLE `order_info` (
   `quantity` int(64) DEFAULT NULL,
   `total_price` double(64,4) DEFAULT NULL,
   `address` text NOT NULL,
-  `buyer_email` varchar(250) NOT NULL
+  `buyer_email` varchar(250) NOT NULL,
+  `status` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `order_info`
 --
 
-INSERT INTO `order_info` (`order_id`, `product_id`, `quantity`, `total_price`, `address`, `buyer_email`) VALUES
-(14, 30, 500, 17500.0000, ' Turin,Spain', 'c.ronaldo@gmail.com'),
-(15, 28, 10000, 500000.0000, ' Madrid,Spain', 'c.ronaldo@gmail.com'),
-(16, 27, 20000, 1600000.0000, ' Paris,France', 'c.ronaldo@gmail.com'),
-(17, 31, 10000, 325000.0000, ' London,England', 'johnwick@gmail.com'),
-(18, 29, 5000, 200000.0000, 'Dhanmondi,Dhaka,Bangladesh ', 'johnwick@gmail.com');
+INSERT INTO `order_info` (`order_id`, `product_id`, `quantity`, `total_price`, `address`, `buyer_email`, `status`) VALUES
+(14, 30, 500, 17500.0000, ' Turin,Spain', 'c.ronaldo@gmail.com', 'Accepted'),
+(15, 28, 10000, 500000.0000, ' Madrid,Spain', 'c.ronaldo@gmail.com', 'Accepted'),
+(16, 27, 20000, 1600000.0000, ' Paris,France', 'c.ronaldo@gmail.com', 'Rejected'),
+(18, 29, 5000, 200000.0000, 'Dhanmondi,Dhaka,Bangladesh ', 'johnwick@gmail.com', 'Accepted'),
+(22, 31, 1000, 32500.0000, ' Rangpur,Bangladesh', 'sadmanirtiza@gmail.com', ''),
+(23, 23, 1000, 90000.0000, ' Dhaka,Bangladesh', 'johnwick@gmail.com', '');
 
 -- --------------------------------------------------------
 
@@ -185,7 +191,8 @@ INSERT INTO `product_info` (`p_id`, `name`, `description`, `image`, `price`, `co
 (28, 'REGULAR FIT SHORT SLEEVE SHIRT WITH CAMOUFLAGE PRINT', 'A short sleeve shirt in red camouflage printed viscose fabric. This shirt has a regular fit, button closure and our CR7 logo tape on the sideseam. ', '6_1604577577.png', 50, 'RED CAMOUFLAGE', 'M,L,XL,XXL', 10000, 'Ha-meem Group', 'delwerp2000@yahoo.com'),
 (29, 'Fleece hoodie', 'Long-sleeved hoodie in soft fleece. Double-layered drawstring hood with a wrapover front, a kangaroo pocket and covered elastication at the cuffs and hem.  Weight  0.61 KG, Composition   Polyester 100%', '7_1604578401.png', 40, 'Light beige', 'S,M,L,XL,XXL', 500, 'BEXIMCO Fashions Ltd.', 'beximcochq@beximco.net'),
 (30, 'Cotton-blend hoodie', 'Top in soft sweatshirt fabric made from a cotton blend with a jersey-lined hood, gently dropped shoulders, long sleeves and ribbing at the cuffs and hem.  Weight     0.22 KG Composition          Cotton 80%, Polyester 20%', '7_1604578901.png', 35, 'Yellow', '2-4Y, 4-6Y', 400, 'BEXIMCO Fashions Ltd.', 'beximcochq@beximco.net'),
-(31, 'Printed sweat shirt', 'Long-sleeved top in soft, printed sweatshirt fabric with ribbing around the neckline, cuffs and hem. Soft brushed inside.  Weight     0.12 KG Composition    Cotton 83%, Polyester 17%', '7_1604579049.png', 32.5, 'Blue/Paw Patrol', '2-4Y, 4-6Y', 1000, 'BEXIMCO Fashions Ltd.', 'beximcochq@beximco.net');
+(31, 'Printed sweat shirt', 'Long-sleeved top in soft, printed sweatshirt fabric with ribbing around the neckline, cuffs and hem. Soft brushed inside.  Weight     0.12 KG Composition    Cotton 83%, Polyester 17%', '7_1604579049.png', 32.5, 'Blue/Paw Patrol', '2-4Y, 4-6Y', 1000, 'BEXIMCO Fashions Ltd.', 'beximcochq@beximco.net'),
+(32, 'SLIM FIT SHORT SLEEVE CREW NECK PULLOVER IN BLACK', 'This classic short sleeve pullover is made of 100% cotton and has a rubber logo print on the chest and a zipper on the side.', '7_1608810223.png', 29.5, 'Black', 'S,M,L,XL', 1000, 'BEXIMCO Fashions Ltd.', 'beximcochq@beximco.net');
 
 -- --------------------------------------------------------
 
@@ -197,20 +204,22 @@ CREATE TABLE `submitted_offers` (
   `id` int(255) NOT NULL,
   `offer_id` int(255) NOT NULL,
   `price` double(255,4) NOT NULL,
-  `g_email` varchar(255) NOT NULL
+  `g_email` varchar(255) NOT NULL,
+  `status` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `submitted_offers`
 --
 
-INSERT INTO `submitted_offers` (`id`, `offer_id`, `price`, `g_email`) VALUES
-(5, 7, 29.8000, 'beximcochq@beximco.net'),
-(6, 4, 24.5000, 'beximcochq@beximco.net'),
-(7, 5, 35.2000, 'beximcochq@beximco.net'),
-(8, 2, 20.5000, 'info@epylliongroup.com'),
-(9, 2, 20.4000, 'beximcochq@beximco.net'),
-(10, 3, 25.3500, 'delwerp2000@yahoo.com');
+INSERT INTO `submitted_offers` (`id`, `offer_id`, `price`, `g_email`, `status`) VALUES
+(7, 5, 35.2000, 'beximcochq@beximco.net', ''),
+(8, 2, 20.5000, 'info@epylliongroup.com', 'Accepted'),
+(10, 3, 25.3500, 'delwerp2000@yahoo.com', 'Rejected'),
+(11, 2, 19.5000, 'delwerp2000@yahoo.com', 'Accepted'),
+(12, 3, 24.0100, 'delwerp2000@yahoo.com', 'Accepted'),
+(13, 3, 24.9000, 'delwerp2000@yahoo.com', 'Rejected'),
+(14, 2, 19.2000, 'delwerp2000@yahoo.com', '');
 
 --
 -- Indexes for dumped tables
@@ -269,37 +278,37 @@ ALTER TABLE `submitted_offers`
 -- AUTO_INCREMENT for table `buyers`
 --
 ALTER TABLE `buyers`
-  MODIFY `buyer_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=503;
+  MODIFY `buyer_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=504;
 
 --
 -- AUTO_INCREMENT for table `login`
 --
 ALTER TABLE `login`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `offers`
 --
 ALTER TABLE `offers`
-  MODIFY `o_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `o_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `order_info`
 --
 ALTER TABLE `order_info`
-  MODIFY `order_id` int(64) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `order_id` int(64) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `product_info`
 --
 ALTER TABLE `product_info`
-  MODIFY `p_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `p_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `submitted_offers`
 --
 ALTER TABLE `submitted_offers`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
