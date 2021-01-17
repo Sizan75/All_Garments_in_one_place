@@ -1,11 +1,13 @@
  <!DOCTYPE html>
  <html>
- <head> 
+ <head>
  	<link rel="stylesheet" href="./css/style.css">
-     <meta charset="utf-8">
-     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="stylesheet" href="./css/main.css">
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
+     <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
 
      <style type="text/css">
  		#customers {
@@ -34,62 +36,66 @@
  <body>
  	<?php include './header.php';
  	$email=$_SESSION['email'];?>
-    <div class="container-fluid topSection" style="background-color: #E5E1DE; padding-top: 20px; padding-bottom: 30px;">
-        <div class="row">
-            <div class="col-1">
-                <img src="./picture/logo.png" alt="..." width="70" height="70" class="rounded-circle profileImg">
-            </div>
-            <div class="col-6">
-                <div class="row">
-                    <a class="navbar-brand" href="./index.php">All Garments in One Place</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="container-fluid">
-        <nav class="navbar navbar-expand-lg">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item active">
-                        <button type="button" onclick="window.location.href='./index.php'" class="btn btn-secondary" style="margin-left: 930px;background-color: #0d6f6f;">Home</button>
+    <div>
+      <nav class="navbar navbar-inverse" >
+          <div class="container-fluid">
 
-                    </li>
-                    <li class="nav-item">
-                        <button type="button" onclick="window.location.href='./logout.php'" class="btn btn-secondary" style="margin-left: 10px;background-color: #0d6f6f;">Logout</button>
-                    </li>
-<!--                    <li class="nav-item">-->
-<!--                        <button type="button" class="btn btn-secondary" style="margin-left: 10px;">Orders</button>-->
-<!--                    </li>-->
+            <div class="navbar-header" >
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+              data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+
+              </button>
+              <a class="navbar-brand" href="./index.php">All Garments In One Place</a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" >
+              <ul class="nav navbar-nav navbar-left">
+                        <li class="active"><a href="./index.php"><span class="glyphicon glyphicon-home"> Home</a></li>
+              </ul>
+
+              <ul class="nav navbar-nav navbar-right">
+                <li class="active"><a href="./buyers_profile.php"><span class="glyphicon glyphicon-user">Profile</a></li>
+                        <li class="active"><a href="./logout.php"><span class="glyphicon glyphicon-log-out">LogOut</a></li>
                 </ul>
             </div>
+          </div>
         </nav>
-    </div>
 
+    </div>
     <div class="body" style="margin: 40px">
  		<table id="customers">
  			<tr>
  				<th>Image</th>
  				<th>Name</th>
- 				<th>Total Price</th>
- 				<th>Address</th>
+        <th>Quantity</th>
+        <th>Unit Price</th>
+      	<th>Total Price</th>
+        <th>Garment Name</th>
+        <th>Delivery Address</th>
+        <th>Status </th>
+        <th>Delete </th>
+
  			</tr>
- 			<?php 
-				$sql="select o.*,p.name,p.image from order_info o inner join product_info p on o.product_id=p.p_id where o.buyer_email='$email'";
+ 			<?php
+				$sql="select o.*,p.name,p.image,p.price,p.gname from order_info o inner join product_info p on o.product_id=p.p_id where o.buyer_email='$email'";
 				$result = mysqli_query($conn, $sql);
 				while($row = mysqli_fetch_array($result)) {
 
 					echo '
 					<tr>
-		 				<td><img src="./picture/product/'.$row['image'].'" width="100" height="100"/></td> 
-		 				<td><a href="./productdetails.php?id='.$row['product_id'].'">'.$row['name'].'</a></td> 
-		 				<td>'.$row['total_price'].'</td> 
-		 				<td>'.$row['address'].'</td> 
-		 			</tr> ';
+		 				<td><img src="./picture/product/'.$row['image'].'" width="100" height="100"/></td>
+		 				<td><a href="./productdetails.php?p_id='.$row['product_id'].'">'.$row['name'].'</a></td>
+            <td>'.$row['quantity'].'</td>
+            <td>'.$row['price'].'</td>
+          	<td>'.$row['total_price'].'</td>
+		 				<td>'.$row['gname'].'</td>
+            <td>'.$row['address'].'</td>
+            <td >'.$row['status'].'</td>
+            <td><button class="btn btn-danger"  onclick="window.location.href=\'./delete1.php?o_id='.$row['order_id'].'\'">Delete</button>
+            </td>
+
+          </tr> ';
 				}
-			?>  
+			?>
  		</table>
  	</div>
  </body>

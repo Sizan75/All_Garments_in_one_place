@@ -38,9 +38,6 @@
               <label for="Password">Password</label>
               <input type="password" class="form-control" id="Password" name="password" placeholder="Password"/>
             </div>
-<!--            <div class="checkbox">-->
-<!--              <a href="forgetpassword.php">Forgot Password</a>-->
-<!--            </div>-->
               <button type="submit" name="submit" class="btn btn-success btn-block">Sign In</button>
             <p>Dont Have an account? Sign Up Now</p>
            <a href="Buyers_registration.php"> <button type="button"  name="signup" class="btn btn-success btn-block">Sign Up</button>

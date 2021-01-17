@@ -1,14 +1,17 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/style.css">
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-    <link rel="stylesheet" href="site.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css"
+     integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+    integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
 
-      <link rel="stylesheet" href="./css/main.css">
-      <link rel="stylesheet" href="./css/style.css">
       <style type="text/css">
           .card {
               box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
@@ -22,70 +25,51 @@
   </head>
   <body>
   <?php include './header.php'; ?>
-  <?php
-  $sql1="select * from garments_information where email='".$_SESSION['email']."' ";
-  $result = mysqli_query($conn, $sql1);
-  if($row = mysqli_fetch_array($result)) {
-      $_SESSION['gname'] = $row['gname'];
-//              $_SESSION['u_type']=$row['u_type'];
-//               $_SESSION['user_id']=$row['id'];
-  }else {
-      echo "Session data not saved";
-  }
-  ?>
-    <div class="container-fluid topSection" >
-        <div class="row">
-<!--            <div class="col-1"></div>-->
-            <div class="col-1" align="center">
-                <img src="./picture/logo.png" alt="..." width="70" height="70" class="rounded-circle profileImg">
-            </div>
-            <div class="col-6">
-                <div class="row">
-                    <a class="navbar-brand" href="./index.php">All Garments in One Place</a>
-                </div>
-            </div>
 
+  <nav class="navbar navbar-inverse" >
+      <div class="container-fluid">
+
+        <div class="navbar-header" >
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+
+          </button>
+          <a class="navbar-brand" href="./index.php">All Garments In One Place</a>
         </div>
-    </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" >
+          <ul class="nav navbar-nav navbar-left">
 
-    <div class="container-fluid">
-        <nav class="navbar navbar-expand-lg">
-
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-              <ul class="navbar-nav">
-                  <li class="nav-item" >
-                      <button type="button"  onclick="window.location.href='./index.php'" class="btn btn-primary" style="margin-left: 750px;">Home</button>
-                  </li>
-                <li class="nav-item">
-                    <button type="button"  onclick="window.location.href='./notifications.php'" class="btn btn-primary" style="margin-left: 10px;">Notifications</button>
-                </li>
-                <li class="nav-item">
-                    <button type="button" onclick="window.location.href='./logout.php'" class="btn btn-primary" style="margin-left: 10px;">Logout</button>
-                </li>
-              </ul>
-            </div>
-        </nav>
-    </div>
-
-
+                    <li class="active"><a href="./index.php"><span class="glyphicon glyphicon-home"> Home</a></li>
+                   <li class="active"><a href = "./product-upload.php" ><span class="glyphicon glyphicon-upload">Product requisition </a ></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+                    <li class="active"><a href="./notifications.php"><span class="glyphicon glyphicon-envelope"> Notifications</a></li>
+                    <li class="active"><a href="./logout.php"><span class="glyphicon glyphicon-log-out"></span> LogOut</a></li>
+            </ul>
+        </div>
+      </div>
+    </nav>
+     <?php
+      $sql1="select * from garments_information where email='".$_SESSION['email']."' ";
+      $result = mysqli_query($conn, $sql1);
+      if($row = mysqli_fetch_array($result)) {
+      $_SESSION['gname'] = $row['gname'];
+      }else {
+      echo "Session data not saved";
+      }
+      ?>
         <?php
         $sql="select * from product_info where gname='".$_SESSION['gname']."' ";
         $result = mysqli_query($conn, $sql);
         while($row = mysqli_fetch_array($result)) {
             echo '
-                <div class="product-box"> 
+                <div class="product-box">
 				<div class="card">
 					<img src="./picture/product/'.$row['image'].'"  style="height:260px;" alt="...">
 					<div class="caption">
-					<h3 style="height:40px;overflow:hidden;"><a href="./productdetails.php?id='.$row['p_id'].'">'.$row['name'].'</a></h3>
+					<h3 style="height:40px;overflow:hidden;"><a href="./productdetails.php?p_id='.$row['p_id'].'">'.$row['name'].'</a></h3>
 					<p class="price">Price: '.$row['price'].' $</p>
-					<p>Garments Name: '.$row['gname'].' </p> 
-					<p>Min Order: '.$row['min_order'].' </p> 
-					
-					<p><button  class="btn btn-primary" onclick="window.location.href=\'./buy-now.php?id='.$row['p_id'].'\'">Buy Now</button></p>
+					<p>Garments Name: '.$row['gname'].' </p>
+					<p>Min Order: '.$row['min_order'].' </p>
 					</div>
 			        </div>
 			         </div>

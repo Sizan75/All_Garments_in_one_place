@@ -1,13 +1,14 @@
 * {box-sizing: border-box;}
 
-body { 
+body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
+  font-family:Cambria;
 }
 
 .header {
   overflow: hidden;
-  background-color: #f1f1f1;
+  background-color: #eeeeee;
   padding: 5px 10px;
 }
 
@@ -42,9 +43,9 @@ body {
 }
 
 .product-box{
-	width: 23%; 
+	width: 23%;
 	float: left;
-	padding: 5px;
+	padding: 1px;
   margin: 50px 10px;
 }
 

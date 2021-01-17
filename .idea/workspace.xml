@@ -1,18 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3339f674-1935-41ae-bafe-c18fe1dfcf56" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Buyers_profile.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Buyers_registration.php" beforeDir="false" afterPath="$PROJECT_DIR$/Buyers_registration.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Garments_profile.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Garments_registration.php" beforeDir="false" afterPath="$PROJECT_DIR$/Garments_registration.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/login.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/picture/product/0_1603749137.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/product-upload.php" beforeDir="false" afterPath="$PROJECT_DIR$/product-upload.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/productdetails.php" beforeDir="false" afterPath="$PROJECT_DIR$/productdetails.php" afterDir="false" />
-    </list>
+    <list default="true" id="3339f674-1935-41ae-bafe-c18fe1dfcf56" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,7 +68,7 @@
       <workItem from="1604320391865" duration="14488000" />
       <workItem from="1604384354695" duration="5266000" />
       <workItem from="1604406210828" duration="5616000" />
-      <workItem from="1604557359294" duration="9985000" />
+      <workItem from="1604557359294" duration="10678000" />
     </task>
     <servers />
   </component>
